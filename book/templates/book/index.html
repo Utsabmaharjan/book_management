@@ -1,0 +1,76 @@
+{% extends "home/base.html" %}
+{% block content %}
+				
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Book</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Book</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="{% url 'create-book' %}" class="btn add-btn"><i class="fa fa-plus"></i> Add Book</a>
+                
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    
+    <!-- Search Filter -->
+    <!-- <div class="row filter-row">
+        <div class="col-sm-6 col-md-3">  
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating">
+                <label class="focus-label">Client ID</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">  
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating">
+                <label class="focus-label">Client Name</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3"> 
+            <div class="form-group form-focus select-focus form-control">
+                <select class="select floating form-control" > 
+                    <option>Select Company</option>
+                    <option>Global Technologies</option>
+                    <option>Delta Infotech</option>
+                </select>
+                <label class="focus-label">Company</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">  
+            <a href="#" class="btn btn-success btn-block"> Search </a>  
+        </div>     
+    </div> -->
+    <!-- Search Filter -->
+    <div class="row staff-grid-row">
+        {% for i in book %}
+        <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+            <div class="profile-widget">
+                <div class="profile-img">
+                    {% if i.image %}
+                    <img alt="" src="{{ i.image.url }}" class="avatar">
+                    {% endif %}
+                </div>
+                <h4 class="user-name m-t-10 mb-0 text-ellipsis">{{i.name}}</h4>
+                <h5 class="user-name m-t-10 mb-0 text-ellipsis"> {% for x in i.genre.all %}
+                    {{x.name}}
+                    {% endfor %}
+                </h5>by
+                <div class="small text-muted">
+                    {% for x in i.author.all %}
+                    {{x.name}}
+                    {% endfor %}
+                </div>
+                <a href="{% url 'view_profile' i.id %}" class="btn btn-white btn-sm m-t-10">View Profile</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
