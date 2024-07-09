@@ -7,6 +7,7 @@ from transaction.service import TransactionService
 from transaction.models import Transaction
 from django.db import transaction
 # Create your views here.
+
 @login_required
 @transaction.atomic
 def admin_add_balance(request):
@@ -28,10 +29,14 @@ def admin_add_balance(request):
     }
     return render(request, 'user/balance-create.html',context)
 
-
+@login_required
 def list_user_balance(request):
     user_balance = UserBalance.objects.all()
     context = {
         'user_balance':user_balance
     }
     return render(request, 'user/balance-list.html',context)
+
+@login_required
+def update_balance(request, id):
+    user_balance = UserBalance.objects.get(id=id)

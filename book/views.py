@@ -48,8 +48,8 @@ def delete_publication(request, id):
 
 @login_required()
 def list_genre(request):
-    Genre = Genre.objects.filter(is_active=True)
-    context = {'genre':Genre}
+    genre = Genre.objects.filter(is_active=True)
+    context = {'genre':genre}
     return render(request, 'genre/index.html', context)
 
 @login_required()
@@ -88,8 +88,8 @@ def delete_genre(request,id):
 
 @login_required()
 def list_genre(request):
-    Genre = Genre.objects.all()
-    context = {'genre':Genre}
+    genre = Genre.objects.all()
+    context = {'genre':genre}
     return render(request, 'genre/index.html', context)
 
 @login_required()
@@ -135,7 +135,6 @@ def delete_book(request,id):
 @login_required()
 def view_profile(request,id):
     reader = Book.objects.get(id=id)
-    
 
     context={
         'data':reader
